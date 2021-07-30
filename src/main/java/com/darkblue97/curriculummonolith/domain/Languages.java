@@ -1,4 +1,28 @@
 package com.darkblue97.curriculummonolith.domain;
 
+import com.darkblue97.curriculummonolith.utils.LanguageEnum;
+import com.darkblue97.curriculummonolith.utils.MasteringLevel;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+
+import java.util.UUID;
+
+@Data
 public class Languages {
+
+    @Id
+    private UUID id;
+    private String language;
+    private MasteringLevel read;
+    private MasteringLevel speak;
+    private MasteringLevel listen;
+    private LanguageEnum languageCode;
+
+    public Languages(UUID id, String language, MasteringLevel read, MasteringLevel speak, MasteringLevel listen) {
+        this.id = id;
+        this.language = language;
+        this.read = read;
+        this.speak = speak;
+        this.listen = listen;
+    }
 }

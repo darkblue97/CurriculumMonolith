@@ -8,19 +8,17 @@ import org.springframework.data.annotation.Id;
 import java.util.UUID;
 
 @Data
-public class Skills {
+public class Technologies {
 
     @Id
     private UUID id;
-    private String skillName;
-    private String description;
-    private MasteringLevel masteringLevel;
+    private String technologyName;
+    private MasteringLevel mastering;
     private LanguageEnum languageCode;
 
-    public Skills(UUID id, String skillName, String description, MasteringLevel masteringLevel) {
+    public Technologies(UUID id, String technologyName, MasteringLevel mastering) {
         this.id = id;
-        this.skillName = skillName;
-        this.description = description;
-        this.masteringLevel = masteringLevel;
+        this.technologyName = technologyName;
+        this.mastering = mastering;
     }
 }
