@@ -15,10 +15,11 @@ public class AboutMe {
     private String mediaId;
     private LanguageEnum languageCode;
 
-    public AboutMe(UUID id, String title, String text, String mediaId) {
+    public AboutMe(UUID id, String title, String text, String mediaId, LanguageEnum languageCode) {
         this.id = id;
         this.title = title;
         this.text = text;
         this.mediaId = mediaId;
+        this.languageCode = languageCode;
     }
 }

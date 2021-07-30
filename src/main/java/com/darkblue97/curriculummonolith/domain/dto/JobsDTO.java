@@ -1,18 +1,18 @@
-package com.darkblue97.curriculummonolith.domain;
+package com.darkblue97.curriculummonolith.domain.dto;
 
+import com.darkblue97.curriculummonolith.domain.Jobs;
+import com.darkblue97.curriculummonolith.domain.Technologies;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Data
-public class Jobs {
-    @Id
-    private UUID id;
+public class JobsDTO {
+
     private String companyName;
     private LocalDateTime started;
     private LocalDateTime ended;
@@ -21,9 +21,7 @@ public class Jobs {
     private List<Technologies> technologies;
     private LanguageEnum languageCode;
 
-    public Jobs(UUID id, String companyName, LocalDateTime started, LocalDateTime ended, boolean actual,
-                String description, List<Technologies> technologies, LanguageEnum languageCode) {
-        this.id = id;
+    public JobsDTO(String companyName, LocalDateTime started, LocalDateTime ended, boolean actual, String description, List<Technologies> technologies, LanguageEnum languageCode) {
         this.companyName = companyName;
         this.started = started;
         this.ended = ended;
@@ -31,5 +29,11 @@ public class Jobs {
         this.description = description;
         this.technologies = technologies;
         this.languageCode = languageCode;
+    }
+
+    public static JobsDTO toDto(Jobs jobs) {
+        return new JobsDTO(jobs.getCompanyName(), jobs.getStarted(), jobs.getEnded(),
+                jobs.isActual(), jobs.getDescription(), jobs.getTechnologies(), jobs.getLanguageCode()
+        );
     }
 }
