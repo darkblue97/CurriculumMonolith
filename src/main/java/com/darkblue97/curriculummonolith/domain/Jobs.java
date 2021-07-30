@@ -3,13 +3,14 @@ package com.darkblue97.curriculummonolith.domain;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Data
+@Document(value = "JobExperience")
 public class Jobs {
     @Id
     private UUID id;

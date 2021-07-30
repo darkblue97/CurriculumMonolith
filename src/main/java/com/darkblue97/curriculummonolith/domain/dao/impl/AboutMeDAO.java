@@ -16,7 +16,7 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
 
     @Override
     public Optional<AboutDTO> get(UUID id) {
-        return Optional.empty();
+        return aboutMeRepository.findById(id).map(AboutDTO::toDTO);
     }
 
     @Override
@@ -26,7 +26,6 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
 
     @Override
     public void save(AboutDTO aboutDTO) {
-
     }
 
     @Override
