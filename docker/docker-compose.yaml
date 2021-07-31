@@ -9,6 +9,18 @@ services:
       - 27017:27017
     volumes:
       - data:/data/db
-
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+    ports:
+      - 8081:8080
+      - 50000:50000
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - /usr/local/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+  sonarqube:
+    image: sonarqube:9.0.1-community
+    ports:
+      - 9000:9000
 volumes:
   data:
