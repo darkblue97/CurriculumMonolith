@@ -13,11 +13,10 @@ pipeline {
             environment {
                 scannerHome = tool 'sonarqube'
             }
-
             steps{
                 echo "Executing Sonar"
-                withSonarQubeEnv('sonarqube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                withSonarQubeEnv() {
+                    sh "./gradlew sonarqube"
                 }
             }
         }
