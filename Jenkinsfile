@@ -21,10 +21,5 @@ pipeline {
                 }
             }
         }
-        stage("DEPLOY"){
-            step{
-                echo "Deploying app"
-            }
-        }
     }
 }
