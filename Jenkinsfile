@@ -11,23 +11,14 @@ pipeline {
         }
         stage("SONAR"){
             environment {
-                scannerHome = tool 'SonarQubeScanner'
+              scannerHome = tool 'sonarqube'
             }
 
             steps{
                 echo "Executing Sonar"
                 withSonarQubeEnv('sonarqube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "./gradlew sonarqube"
                 }
-            }
-            
-            timeout(time: 10, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
-            }
-        }
-        stage("DEPLOY"){
-            step{
-                echo "Deploying app"
             }
         }
     }
