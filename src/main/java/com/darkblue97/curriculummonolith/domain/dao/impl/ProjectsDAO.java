@@ -3,6 +3,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.ProjectsDTO;
 import com.darkblue97.curriculummonolith.repository.ProjectsRepository;
+import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -13,6 +14,11 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
 
     @Autowired
     private ProjectsRepository projectsRepository;
+
+    @Override
+    public Optional<ProjectsDTO> get(LanguageEnum languageEnum) {
+        return Optional.empty();
+    }
 
     @Override
     public Optional<ProjectsDTO> get(UUID id) {

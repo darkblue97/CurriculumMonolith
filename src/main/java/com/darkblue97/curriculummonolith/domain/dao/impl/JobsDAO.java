@@ -3,7 +3,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
 import com.darkblue97.curriculummonolith.repository.ExperienceRepository;
-import com.darkblue97.curriculummonolith.service.ExperienceService;
+import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -14,6 +14,11 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
 
     @Autowired
     private ExperienceRepository experienceRepository;
+
+    @Override
+    public Optional<JobsDTO> get(LanguageEnum languageEnum) {
+        return Optional.empty();
+    }
 
     @Override
     public Optional<JobsDTO> get(UUID id) {

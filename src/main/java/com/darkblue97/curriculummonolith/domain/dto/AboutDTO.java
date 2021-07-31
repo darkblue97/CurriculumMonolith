@@ -1,8 +1,11 @@
 package com.darkblue97.curriculummonolith.domain.dto;
 
 import com.darkblue97.curriculummonolith.domain.AboutMe;
+import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import lombok.Data;
+
+import java.util.UUID;
 
 @Data
 public class AboutDTO {
@@ -20,5 +23,9 @@ public class AboutDTO {
 
     public static AboutDTO toDTO(AboutMe aboutMe) {
         return new AboutDTO(aboutMe.getTitle(), aboutMe.getText(), aboutMe.getMediaId(), aboutMe.getLanguageCode());
+    }
+
+    public static AboutMe toModel(AboutDTO aboutDTO) {
+        return new AboutMe(GenerationUUID.generate(), aboutDTO.getTitle(), aboutDTO.getText(), aboutDTO.getMediaId(), aboutDTO.getLanguageCode());
     }
 }

@@ -5,8 +5,6 @@ import com.darkblue97.curriculummonolith.domain.Technologies;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import lombok.Data;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
