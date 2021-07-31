@@ -9,22 +9,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.UUID;
 
 @Data
-@Document(value = "Languages")
-public class Languages {
+@Document(value = "Technologies")
+public class Technologies {
 
     @Id
     private UUID id;
-    private String language;
-    private MasteringLevel read;
-    private MasteringLevel speak;
-    private MasteringLevel listen;
+    private String technologyName;
+    private MasteringLevel mastering;
     private LanguageEnum languageCode;
 
-    public Languages(UUID id, String language, MasteringLevel read, MasteringLevel speak, MasteringLevel listen) {
+    public Technologies(UUID id, String technologyName, MasteringLevel mastering) {
         this.id = id;
-        this.language = language;
-        this.read = read;
-        this.speak = speak;
-        this.listen = listen;
+        this.technologyName = technologyName;
+        this.mastering = mastering;
     }
 }
