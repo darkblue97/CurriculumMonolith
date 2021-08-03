@@ -36,7 +36,7 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
     }
 
     @Override
-    public void update(ProjectsDTO projectsDTO, String[] params) {
+    public void update(ProjectsDTO projectsDTO) {
 
     }
 

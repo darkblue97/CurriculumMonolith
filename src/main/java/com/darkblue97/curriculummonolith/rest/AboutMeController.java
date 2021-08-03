@@ -42,6 +42,28 @@ public class AboutMeController {
         }
     }
 
+    @PutMapping(value = "/about")
+    public ResponseEntity<Object> putAboutMe(@RequestBody AboutDTO aboutDTO) {
+        try {
+            aboutMeService.putAboutMeInformation(aboutDTO);
+            return new ResponseEntityBuilderResponse<>()
+                    .setMessage("Information successfully saved")
+                    .setStatus(HttpStatus.OK)
+                    .build();
+        } catch (DataAlreadySavedException e) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("Exception saving the about me")
+                    .setObjectResponse(e.getLocalizedMessage())
+                    .setStatus(HttpStatus.NOT_ACCEPTABLE)
+                    .build();
+        } catch (Exception e) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("Internal server error while saving")
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+    }
+
     @PostMapping(value = "/about")
     public ResponseEntity<Object> postAboutMe(@RequestBody AboutDTO aboutDTO) {
         try {
@@ -50,9 +72,31 @@ public class AboutMeController {
                     .setMessage("Information successfully saved")
                     .setStatus(HttpStatus.OK)
                     .build();
-        } catch (DataAlreadySavedException e) {
+        } catch (NotFoundException e) {
             return new ResponseEntityBuilderResponse<>()
-                    .setError("Exception saving the about me")
+                    .setError("Exception updating the about me")
+                    .setObjectResponse(e.getLocalizedMessage())
+                    .setStatus(HttpStatus.NOT_ACCEPTABLE)
+                    .build();
+        } catch (Exception e) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("Internal server error while saving")
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+    }
+
+    @DeleteMapping(value = "/about")
+    public ResponseEntity<Object> deleteAboutMe(@RequestBody AboutDTO aboutDTO) {
+        try {
+            aboutMeService.deleteAboutMeInformation(aboutDTO);
+            return new ResponseEntityBuilderResponse<>()
+                    .setMessage("Information successfully saved")
+                    .setStatus(HttpStatus.OK)
+                    .build();
+        } catch (NotFoundException e) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("Exception deleting the about me")
                     .setObjectResponse(e.getLocalizedMessage())
                     .setStatus(HttpStatus.NOT_ACCEPTABLE)
                     .build();
