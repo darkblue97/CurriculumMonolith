@@ -1,6 +1,7 @@
 package com.darkblue97.curriculummonolith.domain.dao;
 
 import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
+import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface DAOInterface<T> {
 
     void save(T t) throws DataAlreadySavedException;
 
-    void update(T t, String[] params);
+    void update(T t) throws NotFoundException;
 
-    void delete(T t);
+    void delete(T t) throws NotFoundException;
 }
