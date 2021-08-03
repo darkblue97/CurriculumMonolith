@@ -36,7 +36,7 @@ public class SkillsDAO implements DAOInterface<SkillsDTO> {
     }
 
     @Override
-    public void update(SkillsDTO skillsDTO, String[] params) {
+    public void update(SkillsDTO skillsDTO) {
 
     }
 

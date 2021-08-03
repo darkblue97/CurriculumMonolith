@@ -9,12 +9,14 @@ import java.util.UUID;
 
 @Data
 public class AboutDTO {
+    private UUID id;
     private String title;
     private String text;
     private String mediaId;
     private LanguageEnum languageCode;
 
-    public AboutDTO(String title, String text, String mediaId, LanguageEnum languageCode) {
+    public AboutDTO(UUID id, String title, String text, String mediaId, LanguageEnum languageCode) {
+        this.id = id;
         this.title = title;
         this.text = text;
         this.mediaId = mediaId;
@@ -22,7 +24,7 @@ public class AboutDTO {
     }
 
     public static AboutDTO toDTO(AboutMe aboutMe) {
-        return new AboutDTO(aboutMe.getTitle(), aboutMe.getText(), aboutMe.getMediaId(), aboutMe.getLanguageCode());
+        return new AboutDTO(aboutMe.getId(), aboutMe.getTitle(), aboutMe.getText(), aboutMe.getMediaId(), aboutMe.getLanguageCode());
     }
 
     public static AboutMe toModel(AboutDTO aboutDTO) {

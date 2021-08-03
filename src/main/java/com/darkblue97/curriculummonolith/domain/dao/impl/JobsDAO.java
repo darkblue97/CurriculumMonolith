@@ -36,7 +36,7 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
     }
 
     @Override
-    public void update(JobsDTO jobsDTO, String[] params) {
+    public void update(JobsDTO jobsDTO) {
 
     }
 
