@@ -25,7 +25,17 @@ public class AboutMeServiceImpl implements AboutMeService {
     }
 
     @Override
-    public void postAboutMeInformation(AboutDTO aboutDTO) throws DataAlreadySavedException {
+    public void postAboutMeInformation(AboutDTO aboutDTO) throws NotFoundException {
+        aboutMeDAO.update(aboutDTO);
+    }
+
+    @Override
+    public void putAboutMeInformation(AboutDTO aboutDTO) throws DataAlreadySavedException {
         aboutMeDAO.save(aboutDTO);
+    }
+
+    @Override
+    public void deleteAboutMeInformation(AboutDTO aboutDTO) throws NotFoundException {
+        aboutMeDAO.delete(aboutDTO);
     }
 }

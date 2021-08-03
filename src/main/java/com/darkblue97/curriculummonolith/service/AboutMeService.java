@@ -9,5 +9,9 @@ public interface AboutMeService {
 
     AboutDTO getAboutMeInformation(LanguageEnum languageEnum) throws NotFoundException;
 
-    void postAboutMeInformation(AboutDTO aboutDTO) throws DataAlreadySavedException;
+    void postAboutMeInformation(AboutDTO aboutDTO) throws NotFoundException;
+
+    void putAboutMeInformation(AboutDTO aboutDTO) throws DataAlreadySavedException;
+
+    void deleteAboutMeInformation(AboutDTO aboutDTO) throws NotFoundException;
 }

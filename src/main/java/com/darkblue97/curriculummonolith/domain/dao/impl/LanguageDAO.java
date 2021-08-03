@@ -36,7 +36,7 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
     }
 
     @Override
-    public void update(LanguagesDTO languagesDTO, String[] params) {
+    public void update(LanguagesDTO languagesDTO) {
 
     }
 
