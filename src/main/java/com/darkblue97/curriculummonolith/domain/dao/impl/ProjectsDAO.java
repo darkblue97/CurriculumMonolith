@@ -26,7 +26,7 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
     }
 
     @Override
-    public List<ProjectsDTO> getAll() {
+    public List<ProjectsDTO> getAll(LanguageEnum languageEnum) {
         return null;
     }
 

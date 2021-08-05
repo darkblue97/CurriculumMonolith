@@ -15,7 +15,7 @@ public interface DAOInterface<T> {
 
     Optional<T> get(UUID id);
 
-    List<T> getAll();
+    List<T> getAll(LanguageEnum languageEnum);
 
     void save(T t) throws DataAlreadySavedException;
 

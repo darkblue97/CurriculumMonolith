@@ -4,16 +4,23 @@ import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
 import com.darkblue97.curriculummonolith.repository.ExperienceRepository;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
+@Component
 public class JobsDAO implements DAOInterface<JobsDTO> {
 
-    @Autowired
-    private ExperienceRepository experienceRepository;
+    private final ExperienceRepository experienceRepository;
+
+    public JobsDAO(ExperienceRepository experienceRepository) {
+        this.experienceRepository = experienceRepository;
+    }
 
     @Override
     public Optional<JobsDTO> get(LanguageEnum languageEnum) {
@@ -26,8 +33,10 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
     }
 
     @Override
-    public List<JobsDTO> getAll() {
-        return null;
+    public List<JobsDTO> getAll(LanguageEnum languageEnum) {
+        List<JobsDTO> jobsDTOS = new ArrayList<>();
+        experienceRepository.findAllByLanguageCode(languageEnum).forEach(k -> jobsDTOS.add(JobsDTO.toDto(k)));
+        return jobsDTOS;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
     }
 
     @Override
-    public List<LanguagesDTO> getAll() {
+    public List<LanguagesDTO> getAll(LanguageEnum languageEnum) {
         return null;
     }
 

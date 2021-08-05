@@ -14,12 +14,18 @@ public class JobsDTO {
     private String companyName;
     private LocalDateTime started;
     private LocalDateTime ended;
-    private boolean actual = false;
+    private boolean actual;
     private String description;
     private List<Technologies> technologies;
     private LanguageEnum languageCode;
 
-    public JobsDTO(String companyName, LocalDateTime started, LocalDateTime ended, boolean actual, String description, List<Technologies> technologies, LanguageEnum languageCode) {
+    public JobsDTO(String companyName,
+                   LocalDateTime started,
+                   LocalDateTime ended,
+                   boolean actual,
+                   String description,
+                   List<Technologies> technologies,
+                   LanguageEnum languageCode) {
         this.companyName = companyName;
         this.started = started;
         this.ended = ended;
