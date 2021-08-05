@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,6 +25,29 @@ public class ExperienceController {
 
     @GetMapping(value = "/experience/{language}")
     public ResponseEntity<Object> getAllExperience(@PathVariable("language") LanguageEnum language) {
+        try {
+            List<JobsDTO> jobsDTOS = experienceService.getAllExperience(language);
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.OK)
+                    .setObjectResponse(jobsDTOS)
+                    .setMessage("About me information")
+                    .build();
+        } catch (NotFoundException nte) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError(nte.toString())
+                    .setStatus(HttpStatus.NOT_FOUND)
+                    .setObjectResponse(nte.getLocalizedMessage())
+                    .build();
+        } catch (Exception ex) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("Internal server error")
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+    }
+
+    @PutMapping(value = "/experience/{language}")
+    public ResponseEntity<Object> putExperience(@PathVariable("language") LanguageEnum language) {
         try {
             List<JobsDTO> jobsDTOS = experienceService.getAllExperience(language);
             return new ResponseEntityBuilderResponse<>()

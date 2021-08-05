@@ -16,11 +16,6 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
     private LanguagesRepository languagesRepository;
 
     @Override
-    public Optional<LanguagesDTO> get(LanguageEnum languageEnum) {
-        return Optional.empty();
-    }
-
-    @Override
     public Optional<LanguagesDTO> get(UUID id) {
         return Optional.empty();
     }

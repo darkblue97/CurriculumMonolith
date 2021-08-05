@@ -27,7 +27,6 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
         this.aboutMeRepository = aboutMeRepository;
     }
 
-    @Override
     public Optional<AboutDTO> get(LanguageEnum language) {
         return aboutMeRepository.findByLanguageCode(language).map(AboutDTO::toDTO);
     }
