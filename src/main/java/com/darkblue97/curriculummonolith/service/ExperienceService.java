@@ -11,4 +11,8 @@ public interface ExperienceService {
     List<JobsDTO> getAllExperience(LanguageEnum languageEnum) throws NotFoundException;
 
     void putExperience(JobsDTO jobsDTO);
+
+    void postExperience(JobsDTO jobsDTO) throws NotFoundException;
+
+    void deleteExperience(JobsDTO jobsDTO) throws NotFoundException;
 }
