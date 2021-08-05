@@ -26,7 +26,7 @@ public class SkillsDAO implements DAOInterface<SkillsDTO> {
     }
 
     @Override
-    public List<SkillsDTO> getAll() {
+    public List<SkillsDTO> getAll(LanguageEnum languageEnum) {
         return null;
     }
 

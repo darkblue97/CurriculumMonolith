@@ -38,7 +38,7 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
     }
 
     @Override
-    public List<AboutDTO> getAll() {
+    public List<AboutDTO> getAll(LanguageEnum languageEnum) {
         List<AboutDTO> aboutDTOS = new ArrayList<>();
         aboutMeRepository.findAll().iterator().forEachRemaining(k -> aboutDTOS.add(AboutDTO.toDTO(k)));
         return aboutDTOS;

@@ -80,7 +80,7 @@ public class AboutMeController {
                     .build();
         } catch (Exception e) {
             return new ResponseEntityBuilderResponse<>()
-                    .setError("Internal server error while saving")
+                    .setError("Internal server error while updating")
                     .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                     .build();
         }
@@ -91,7 +91,7 @@ public class AboutMeController {
         try {
             aboutMeService.deleteAboutMeInformation(aboutDTO);
             return new ResponseEntityBuilderResponse<>()
-                    .setMessage("Information successfully saved")
+                    .setMessage("Information successfully deleted")
                     .setStatus(HttpStatus.OK)
                     .build();
         } catch (NotFoundException e) {
