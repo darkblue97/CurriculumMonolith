@@ -24,4 +24,9 @@ public class ExperienceServiceImpl implements ExperienceService {
     public List<JobsDTO> getAllExperience(LanguageEnum languageEnum) {
         return jobsDAO.getAll(languageEnum);
     }
+
+    @Override
+    public void putExperience(JobsDTO jobsDTO) {
+        jobsDAO.save(jobsDTO);
+    }
 }

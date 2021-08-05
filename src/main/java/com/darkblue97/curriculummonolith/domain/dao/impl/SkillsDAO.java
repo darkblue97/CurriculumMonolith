@@ -16,11 +16,6 @@ public class SkillsDAO implements DAOInterface<SkillsDTO> {
     private SkillsRepository skillsRepository;
 
     @Override
-    public Optional<SkillsDTO> get(LanguageEnum languageEnum) {
-        return Optional.empty();
-    }
-
-    @Override
     public Optional<SkillsDTO> get(UUID id) {
         return Optional.empty();
     }

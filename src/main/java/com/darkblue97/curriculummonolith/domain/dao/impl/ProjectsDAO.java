@@ -16,11 +16,6 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
     private ProjectsRepository projectsRepository;
 
     @Override
-    public Optional<ProjectsDTO> get(LanguageEnum languageEnum) {
-        return Optional.empty();
-    }
-
-    @Override
     public Optional<ProjectsDTO> get(UUID id) {
         return Optional.empty();
     }

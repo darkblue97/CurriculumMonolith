@@ -11,8 +11,6 @@ import java.util.UUID;
 public interface DAOInterface<T> {
 
 
-    Optional<T> get(LanguageEnum languageEnum);
-
     Optional<T> get(UUID id);
 
     List<T> getAll(LanguageEnum languageEnum);

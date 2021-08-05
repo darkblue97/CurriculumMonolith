@@ -9,4 +9,6 @@ import java.util.List;
 public interface ExperienceService {
 
     List<JobsDTO> getAllExperience(LanguageEnum languageEnum) throws NotFoundException;
+
+    void putExperience(JobsDTO jobsDTO);
 }
