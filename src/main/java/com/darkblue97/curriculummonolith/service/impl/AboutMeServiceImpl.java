@@ -9,6 +9,8 @@ import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Component
 @Service
 public class AboutMeServiceImpl implements AboutMeService {
@@ -35,7 +37,7 @@ public class AboutMeServiceImpl implements AboutMeService {
     }
 
     @Override
-    public void deleteAboutMeInformation(AboutDTO aboutDTO) throws NotFoundException {
-        aboutMeDAO.delete(aboutDTO);
+    public void deleteAboutMeInformation(UUID id) throws NotFoundException {
+        aboutMeDAO.delete(id);
     }
 }

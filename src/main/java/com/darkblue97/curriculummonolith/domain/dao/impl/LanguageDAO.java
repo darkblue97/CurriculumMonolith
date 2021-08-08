@@ -2,6 +2,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.LanguagesDTO;
+import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.repository.LanguagesRepository;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
     }
 
     @Override
-    public void delete(LanguagesDTO languagesDTO) {
+    public void delete(UUID id) throws NotFoundException {
 
     }
 }

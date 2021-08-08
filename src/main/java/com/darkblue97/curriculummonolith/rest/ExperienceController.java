@@ -1,8 +1,10 @@
 package com.darkblue97.curriculummonolith.rest;
 
+import com.darkblue97.curriculummonolith.domain.UuidDTO;
 import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.service.ExperienceService;
+import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.response.ResponseEntityBuilderResponse;
 import org.springframework.http.HttpStatus;
@@ -50,7 +52,6 @@ public class ExperienceController {
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setMessage("Information successfully saved")
-                    .setMessage("About me information")
                     .build();
         } catch (Exception ex) {
             return new ResponseEntityBuilderResponse<>()
@@ -67,7 +68,6 @@ public class ExperienceController {
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setMessage("Information successfully saved")
-                    .setMessage("About me information")
                     .build();
         } catch (NotFoundException nte) {
             return new ResponseEntityBuilderResponse<>()
@@ -84,13 +84,19 @@ public class ExperienceController {
     }
 
     @DeleteMapping(value = "/experience")
-    public ResponseEntity<Object> deleteExperience(@RequestBody JobsDTO jobsDTO) {
+    public ResponseEntity<Object> deleteExperience(@RequestBody UuidDTO uuidDTO) {
         try {
-            experienceService.deleteExperience(jobsDTO);
+            if(GenerationUUID.isUUIDValid(uuidDTO.getId())){
+                experienceService.deleteExperience(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
+            } else {
+                return new ResponseEntityBuilderResponse<>()
+                        .setStatus(HttpStatus.OK)
+                        .setMessage("UUID provided does not exist")
+                        .build();
+            }
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setMessage("Information successfully deleted")
-                    .setMessage("About me information")
                     .build();
         } catch (NotFoundException nte) {
             return new ResponseEntityBuilderResponse<>()
@@ -105,5 +111,4 @@ public class ExperienceController {
                     .build();
         }
     }
-
 }
