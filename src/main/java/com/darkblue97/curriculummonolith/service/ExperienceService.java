@@ -5,6 +5,7 @@ import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ExperienceService {
 
@@ -14,5 +15,5 @@ public interface ExperienceService {
 
     void postExperience(JobsDTO jobsDTO) throws NotFoundException;
 
-    void deleteExperience(JobsDTO jobsDTO) throws NotFoundException;
+    void deleteExperience(UUID id) throws NotFoundException;
 }

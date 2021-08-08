@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @Service
@@ -22,7 +23,7 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
-    public List<JobsDTO> getAllExperience(LanguageEnum languageEnum) {
+    public List<JobsDTO> getAllExperience(LanguageEnum languageEnum) throws NotFoundException {
         return jobsDAO.getAll(languageEnum);
     }
 
@@ -37,7 +38,7 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
-    public void deleteExperience(JobsDTO jobsDTO) throws NotFoundException {
-        jobsDAO.delete(jobsDTO);
+    public void deleteExperience(UUID id) throws NotFoundException {
+        jobsDAO.delete(id);
     }
 }

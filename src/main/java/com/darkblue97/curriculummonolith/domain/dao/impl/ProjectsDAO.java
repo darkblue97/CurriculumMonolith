@@ -2,6 +2,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.ProjectsDTO;
+import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.repository.ProjectsRepository;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
     }
 
     @Override
-    public void delete(ProjectsDTO projectsDTO) {
+    public void delete(UUID id) throws NotFoundException {
 
     }
 }

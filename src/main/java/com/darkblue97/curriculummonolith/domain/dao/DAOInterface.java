@@ -13,11 +13,11 @@ public interface DAOInterface<T> {
 
     Optional<T> get(UUID id);
 
-    List<T> getAll(LanguageEnum languageEnum);
+    List<T> getAll(LanguageEnum languageEnum) throws NotFoundException;
 
     void save(T t) throws DataAlreadySavedException;
 
     void update(T t) throws NotFoundException;
 
-    void delete(T t) throws NotFoundException;
+    void delete(UUID id) throws NotFoundException;
 }

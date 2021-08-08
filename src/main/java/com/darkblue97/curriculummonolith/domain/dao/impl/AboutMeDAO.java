@@ -74,9 +74,8 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
     }
 
     @Override
-    @Transactional
-    public void delete(AboutDTO aboutDTO) throws NotFoundException {
-        AboutDTO aboutMeToDelete = get(aboutDTO.getId()).orElseThrow(() -> new NotFoundException("Data not found"));
+    public void delete(UUID id) throws NotFoundException {
+        AboutDTO aboutMeToDelete = get(id).orElseThrow(() -> new NotFoundException("Data not found"));
         AboutMe aboutMe = AboutDTO.toModel(aboutMeToDelete);
         aboutMeRepository.delete(aboutMe);
     }

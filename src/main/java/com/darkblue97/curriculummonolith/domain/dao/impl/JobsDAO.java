@@ -30,9 +30,14 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
     }
 
     @Override
-    public List<JobsDTO> getAll(LanguageEnum languageEnum) {
+    public List<JobsDTO> getAll(LanguageEnum languageEnum) throws NotFoundException {
         List<JobsDTO> jobsDTOS = new ArrayList<>();
         experienceRepository.findAllByLanguageCode(languageEnum).forEach(k -> jobsDTOS.add(JobsDTO.toDto(k)));
+
+        if(jobsDTOS.isEmpty()){
+            throw new NotFoundException("Jobs not found");
+        }
+
         return jobsDTOS;
     }
 
@@ -60,8 +65,8 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
     }
 
     @Override
-    public void delete(JobsDTO jobsDTO) throws NotFoundException {
-        JobsDTO toDelete = get(jobsDTO.getId()).orElseThrow(
+    public void delete(UUID id) throws NotFoundException {
+        JobsDTO toDelete = get(id).orElseThrow(
                 () -> new NotFoundException("Job experience with that UUID is not found database")
         );
 
