@@ -14,13 +14,16 @@ public class Technologies {
 
     @Id
     private UUID id;
+    private String description;
     private String technologyName;
     private MasteringLevel mastering;
     private LanguageEnum languageCode;
 
-    public Technologies(UUID id, String technologyName, MasteringLevel mastering) {
+    public Technologies(UUID id, String description, String technologyName, MasteringLevel mastering, LanguageEnum languageCode) {
         this.id = id;
+        this.description = description;
         this.technologyName = technologyName;
         this.mastering = mastering;
+        this.languageCode = languageCode;
     }
 }
