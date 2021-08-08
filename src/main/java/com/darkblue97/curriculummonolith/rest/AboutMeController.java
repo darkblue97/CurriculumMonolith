@@ -1,9 +1,11 @@
 package com.darkblue97.curriculummonolith.rest;
 
+import com.darkblue97.curriculummonolith.domain.UuidDTO;
 import com.darkblue97.curriculummonolith.domain.dto.AboutDTO;
 import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.service.AboutMeService;
+import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.response.ResponseEntityBuilderResponse;
 import org.springframework.http.HttpStatus;
@@ -80,18 +82,26 @@ public class AboutMeController {
                     .build();
         } catch (Exception e) {
             return new ResponseEntityBuilderResponse<>()
-                    .setError("Internal server error while saving")
+                    .setError("Internal server error while updating")
                     .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                     .build();
         }
     }
 
     @DeleteMapping(value = "/about")
-    public ResponseEntity<Object> deleteAboutMe(@RequestBody AboutDTO aboutDTO) {
+    public ResponseEntity<Object> deleteAboutMe(@RequestBody UuidDTO uuidDTO) {
         try {
-            aboutMeService.deleteAboutMeInformation(aboutDTO);
+            if (GenerationUUID.isUUIDValid(uuidDTO.getId())) {
+                aboutMeService.deleteAboutMeInformation(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
+            } else {
+                return new ResponseEntityBuilderResponse<>()
+                        .setStatus(HttpStatus.OK)
+                        .setMessage("UUID provided does not exist")
+                        .build();
+            }
+
             return new ResponseEntityBuilderResponse<>()
-                    .setMessage("Information successfully saved")
+                    .setMessage("Information successfully deleted")
                     .setStatus(HttpStatus.OK)
                     .build();
         } catch (NotFoundException e) {

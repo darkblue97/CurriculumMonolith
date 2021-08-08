@@ -8,7 +8,7 @@ public class GenerationUUID {
     private GenerationUUID() {
     }
 
-    private static final String REGEX_UUID = "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$";
+    private static final String REGEX_UUID = "([a-f0-9]{8}(-[a-f0-9]{4}){4}[a-f0-9]{8})";
     private static final Pattern UUID_REGEX_PATTERN = Pattern.compile(REGEX_UUID);
 
     public static UUID generate() {
@@ -20,5 +20,9 @@ public class GenerationUUID {
             return false;
         }
         return UUID_REGEX_PATTERN.matcher(uuid).matches();
+    }
+
+    public static UUID returnUUIDFrmString(String id) {
+        return UUID.fromString(id);
     }
 }

@@ -27,7 +27,6 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
         this.aboutMeRepository = aboutMeRepository;
     }
 
-    @Override
     public Optional<AboutDTO> get(LanguageEnum language) {
         return aboutMeRepository.findByLanguageCode(language).map(AboutDTO::toDTO);
     }
@@ -38,7 +37,7 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
     }
 
     @Override
-    public List<AboutDTO> getAll() {
+    public List<AboutDTO> getAll(LanguageEnum languageEnum) {
         List<AboutDTO> aboutDTOS = new ArrayList<>();
         aboutMeRepository.findAll().iterator().forEachRemaining(k -> aboutDTOS.add(AboutDTO.toDTO(k)));
         return aboutDTOS;
@@ -75,9 +74,8 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
     }
 
     @Override
-    @Transactional
-    public void delete(AboutDTO aboutDTO) throws NotFoundException {
-        AboutDTO aboutMeToDelete = get(aboutDTO.getId()).orElseThrow(() -> new NotFoundException("Data not found"));
+    public void delete(UUID id) throws NotFoundException {
+        AboutDTO aboutMeToDelete = get(id).orElseThrow(() -> new NotFoundException("Data not found"));
         AboutMe aboutMe = AboutDTO.toModel(aboutMeToDelete);
         aboutMeRepository.delete(aboutMe);
     }

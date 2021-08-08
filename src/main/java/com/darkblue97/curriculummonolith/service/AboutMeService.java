@@ -5,6 +5,8 @@ import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 
+import java.util.UUID;
+
 public interface AboutMeService {
 
     AboutDTO getAboutMeInformation(LanguageEnum languageEnum) throws NotFoundException;
@@ -13,5 +15,5 @@ public interface AboutMeService {
 
     void putAboutMeInformation(AboutDTO aboutDTO) throws DataAlreadySavedException;
 
-    void deleteAboutMeInformation(AboutDTO aboutDTO) throws NotFoundException;
+    void deleteAboutMeInformation(UUID id) throws NotFoundException;
 }
