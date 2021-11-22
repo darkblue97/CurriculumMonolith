@@ -25,7 +25,7 @@ public class ExperienceController {
     @GetMapping(value = "/experience/{language}")
     public ResponseEntity<Object> getAllExperience(@PathVariable("language") LanguageEnum language) {
         try {
-            List<JobsDTO> jobsDTOS = experienceService.getAllExperience(language);
+            List<JobsDTO> jobsDTOS = experienceService.getAll(language);
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setObjectResponse(jobsDTOS)
@@ -48,7 +48,7 @@ public class ExperienceController {
     @PutMapping(value = "/experience")
     public ResponseEntity<Object> putExperience(@RequestBody JobsDTO jobsDTO) {
         try {
-            experienceService.putExperience(jobsDTO);
+            experienceService.putObject(jobsDTO);
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setMessage("Information successfully saved")
@@ -64,7 +64,7 @@ public class ExperienceController {
     @PostMapping(value = "/experience")
     public ResponseEntity<Object> postExperience(@RequestBody JobsDTO jobsDTO) {
         try {
-            experienceService.postExperience(jobsDTO);
+            experienceService.postObject(jobsDTO);
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setMessage("Information successfully saved")
@@ -87,7 +87,7 @@ public class ExperienceController {
     public ResponseEntity<Object> deleteExperience(@RequestBody UuidDTO uuidDTO) {
         try {
             if(GenerationUUID.isUUIDValid(uuidDTO.getId())){
-                experienceService.deleteExperience(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
+                experienceService.deleteObject(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
             } else {
                 return new ResponseEntityBuilderResponse<>()
                         .setStatus(HttpStatus.OK)
