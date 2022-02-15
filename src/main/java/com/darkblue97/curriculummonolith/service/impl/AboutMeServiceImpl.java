@@ -9,6 +9,7 @@ import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -22,22 +23,27 @@ public class AboutMeServiceImpl implements AboutMeService {
     }
 
     @Override
+    public List<AboutDTO> getAll(LanguageEnum languageEnum) throws NotFoundException {
+        return null;
+    }
+
+    @Override
     public AboutDTO getAboutMeInformation(LanguageEnum languageEnum) throws NotFoundException {
         return aboutMeDAO.get(languageEnum).orElseThrow(() -> new NotFoundException("Data not found"));
     }
 
     @Override
-    public void postAboutMeInformation(AboutDTO aboutDTO) throws NotFoundException {
+    public void postObject(AboutDTO aboutDTO) throws NotFoundException {
         aboutMeDAO.update(aboutDTO);
     }
 
     @Override
-    public void putAboutMeInformation(AboutDTO aboutDTO) throws DataAlreadySavedException {
+    public void putObject(AboutDTO aboutDTO) throws DataAlreadySavedException {
         aboutMeDAO.save(aboutDTO);
     }
 
     @Override
-    public void deleteAboutMeInformation(UUID id) throws NotFoundException {
+    public void deleteObject(UUID id) throws NotFoundException {
         aboutMeDAO.delete(id);
     }
 }

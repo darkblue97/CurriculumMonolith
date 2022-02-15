@@ -47,7 +47,7 @@ public class AboutMeController {
     @PutMapping(value = "/about")
     public ResponseEntity<Object> putAboutMe(@RequestBody AboutDTO aboutDTO) {
         try {
-            aboutMeService.putAboutMeInformation(aboutDTO);
+            aboutMeService.putObject(aboutDTO);
             return new ResponseEntityBuilderResponse<>()
                     .setMessage("Information successfully saved")
                     .setStatus(HttpStatus.OK)
@@ -69,7 +69,7 @@ public class AboutMeController {
     @PostMapping(value = "/about")
     public ResponseEntity<Object> postAboutMe(@RequestBody AboutDTO aboutDTO) {
         try {
-            aboutMeService.postAboutMeInformation(aboutDTO);
+            aboutMeService.postObject(aboutDTO);
             return new ResponseEntityBuilderResponse<>()
                     .setMessage("Information successfully saved")
                     .setStatus(HttpStatus.OK)
@@ -89,10 +89,11 @@ public class AboutMeController {
     }
 
     @DeleteMapping(value = "/about")
-    public ResponseEntity<Object> deleteAboutMe(@RequestBody UuidDTO uuidDTO) {
+    public ResponseEntity<Object> deleteAboutMe(@RequestBody String uid) {
         try {
+            UuidDTO uuidDTO = new UuidDTO(uid);
             if (GenerationUUID.isUUIDValid(uuidDTO.getId())) {
-                aboutMeService.deleteAboutMeInformation(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
+                aboutMeService.deleteObject(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
             } else {
                 return new ResponseEntityBuilderResponse<>()
                         .setStatus(HttpStatus.OK)

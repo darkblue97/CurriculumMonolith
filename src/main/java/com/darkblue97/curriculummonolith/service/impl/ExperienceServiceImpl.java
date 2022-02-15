@@ -5,7 +5,6 @@ import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.service.ExperienceService;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -23,22 +22,22 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
-    public List<JobsDTO> getAllExperience(LanguageEnum languageEnum) throws NotFoundException {
+    public List<JobsDTO> getAll(LanguageEnum languageEnum) throws NotFoundException {
         return jobsDAO.getAll(languageEnum);
     }
 
     @Override
-    public void putExperience(JobsDTO jobsDTO) {
+    public void putObject(JobsDTO jobsDTO) {
         jobsDAO.save(jobsDTO);
     }
 
     @Override
-    public void postExperience(JobsDTO jobsDTO) throws NotFoundException {
+    public void postObject(JobsDTO jobsDTO) throws NotFoundException {
         jobsDAO.update(jobsDTO);
     }
 
     @Override
-    public void deleteExperience(UUID id) throws NotFoundException {
+    public void deleteObject(UUID id) throws NotFoundException {
         jobsDAO.delete(id);
     }
 }
