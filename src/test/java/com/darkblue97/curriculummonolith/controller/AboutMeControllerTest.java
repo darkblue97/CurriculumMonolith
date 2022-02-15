@@ -1,7 +1,6 @@
 package com.darkblue97.curriculummonolith.controller;
 
 
-import com.darkblue97.curriculummonolith.TestSetUp;
 import com.darkblue97.curriculummonolith.repository.AboutMeRepository;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import org.junit.jupiter.api.Test;
@@ -9,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-class AboutMeControllerTest extends TestSetUp {
+class AboutMeControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -25,8 +22,8 @@ class AboutMeControllerTest extends TestSetUp {
 
     @Test
     public void givenGetAboutMe_whenDataExist_thenReturnOk() throws Exception {
-        MONGO_DB_CONTAINER.getLogs();
-        when(aboutMeRepository.findByLanguageCode(any())).thenReturn(setUpDataAboutMe());
+//        MONGO_DB_CONTAINER.getLogs();
+//        when(aboutMeRepository.findByLanguageCode(any())).thenReturn(setUpDataAboutMe());
 
         mvc.perform(get("/experience/" + LanguageEnum.CAT)
                         .contentType(MediaType.APPLICATION_JSON))

@@ -43,12 +43,13 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
     @Transactional
     public void save(LanguagesDTO languagesDTO) throws DataAlreadySavedException {
         Optional<LanguagesDTO> languageEnumOptional = getLanguage(languagesDTO.getLanguageCode());
-        if (languageEnumOptional.isEmpty()) {
-            languagesDTO.setId(GenerationUUID.generate());
-            languagesRepository.save(LanguagesDTO.toModel(languagesDTO));
+
+        if (languageEnumOptional.isPresent()) {
+            throw new DataAlreadySavedException("Data already saved with this language code");
         }
 
-        throw new DataAlreadySavedException("Data already saved with this language code");
+        languagesDTO.setId(GenerationUUID.generate());
+        languagesRepository.save(LanguagesDTO.toModel(languagesDTO));
     }
 
     @Override

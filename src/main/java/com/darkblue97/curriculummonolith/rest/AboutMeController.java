@@ -89,8 +89,9 @@ public class AboutMeController {
     }
 
     @DeleteMapping(value = "/about")
-    public ResponseEntity<Object> deleteAboutMe(@RequestBody UuidDTO uuidDTO) {
+    public ResponseEntity<Object> deleteAboutMe(@RequestBody String uid) {
         try {
+            UuidDTO uuidDTO = new UuidDTO(uid);
             if (GenerationUUID.isUUIDValid(uuidDTO.getId())) {
                 aboutMeService.deleteObject(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
             } else {

@@ -1,9 +1,8 @@
 package com.darkblue97.curriculummonolith.controller;
 
-import com.darkblue97.curriculummonolith.TestSetUp;
 import org.junit.jupiter.api.Test;
 
-class ExperienceControllerTest extends TestSetUp {
+class ExperienceControllerTest {
 
     @Test
     public void givenGetExperience_whenDataExist_thenReturnOk() {

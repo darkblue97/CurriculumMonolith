@@ -6,7 +6,6 @@ import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.service.LanguageService;
 import com.darkblue97.curriculummonolith.utils.GenerationUUID;
-import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.response.ResponseEntityBuilderResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +22,10 @@ public class LanguagesController {
         this.languageService = languageService;
     }
 
-    @GetMapping(value = "/about/{language}")
-    public ResponseEntity<Object> getLanguages(@PathVariable("language") LanguageEnum language) {
+    @GetMapping(value = "/language")
+    public ResponseEntity<Object> getAllLanguage() {
         try {
-            List<LanguagesDTO> languagesDTO = languageService.getAll(language);
+            List<LanguagesDTO> languagesDTO = languageService.getAll(null);
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setObjectResponse(languagesDTO)
@@ -46,7 +45,7 @@ public class LanguagesController {
         }
     }
 
-    @PutMapping(value = "/about")
+    @PutMapping(value = "/language")
     public ResponseEntity<Object> putLanguage(@RequestBody LanguagesDTO languagesDTO) {
         try {
             languageService.putObject(languagesDTO);
@@ -56,7 +55,7 @@ public class LanguagesController {
                     .build();
         } catch (DataAlreadySavedException e) {
             return new ResponseEntityBuilderResponse<>()
-                    .setError("Exception saving the about me")
+                    .setError("Exception saving the desired language")
                     .setObjectResponse(e.getLocalizedMessage())
                     .setStatus(HttpStatus.NOT_ACCEPTABLE)
                     .build();
@@ -68,7 +67,7 @@ public class LanguagesController {
         }
     }
 
-    @PostMapping(value = "/about")
+    @PostMapping(value = "/language/{language}")
     public ResponseEntity<Object> postLanguage(@RequestBody LanguagesDTO languagesDTO) {
         try {
             languageService.postObject(languagesDTO);
@@ -90,9 +89,11 @@ public class LanguagesController {
         }
     }
 
-    @DeleteMapping(value = "/about")
-    public ResponseEntity<Object> deleteLanguage(@RequestBody UuidDTO uuidDTO) {
+    @DeleteMapping(value = "/language")
+    public ResponseEntity<Object> deleteLanguage(@RequestBody String uid) {
         try {
+            UuidDTO uuidDTO = new UuidDTO(uid);
+
             if (GenerationUUID.isUUIDValid(uuidDTO.getId())) {
                 languageService.deleteObject(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
             } else {
