@@ -11,7 +11,7 @@ public interface CommonMethods<T, V> {
 
     void putObject(V v) throws DataAlreadySavedException;
 
-    void postObject(V v) throws NotFoundException;
+    void postObject(V v) throws NotFoundException, DataAlreadySavedException;
 
     void deleteObject(UUID id) throws NotFoundException;
 }

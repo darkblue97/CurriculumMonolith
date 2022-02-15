@@ -1,2 +1,2 @@
 # CurriculumMonolith
-Monolith application java 11
+Monolith application java 17
