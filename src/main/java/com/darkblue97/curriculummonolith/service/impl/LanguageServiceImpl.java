@@ -24,7 +24,7 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public List<LanguagesDTO> getAll(LanguageEnum languageEnum) throws NotFoundException {
-        return languageDAO.getAll(null);
+        return languageDAO.getAll(languageEnum);
     }
 
     @Override
