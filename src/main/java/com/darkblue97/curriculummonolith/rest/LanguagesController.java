@@ -29,7 +29,7 @@ public class LanguagesController {
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setObjectResponse(languagesDTO)
-                    .setMessage("About me information")
+                    .setMessage("Language")
                     .build();
         } catch (NotFoundException nte) {
             return new ResponseEntityBuilderResponse<>()
