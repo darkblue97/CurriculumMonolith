@@ -84,9 +84,10 @@ public class ExperienceController {
     }
 
     @DeleteMapping(value = "/experience")
-    public ResponseEntity<Object> deleteExperience(@RequestBody UuidDTO uuidDTO) {
+    public ResponseEntity<Object> deleteExperience(@RequestBody String uid) {
         try {
-            if(GenerationUUID.isUUIDValid(uuidDTO.getId())){
+            UuidDTO uuidDTO = new UuidDTO(uid);
+            if (GenerationUUID.isUUIDValid(uuidDTO.getId())) {
                 experienceService.deleteObject(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
             } else {
                 return new ResponseEntityBuilderResponse<>()
