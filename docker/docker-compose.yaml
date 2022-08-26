@@ -10,7 +10,7 @@ services:
     volumes:
       - data:/data/db
   jenkins:
-    image: jenkins/jenkins:lts-jdk11
+    image: jenkins/jenkins:lts-jdk17
     ports:
       - 8081:8080
       - 50000:50000
