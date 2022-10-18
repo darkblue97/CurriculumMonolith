@@ -26,8 +26,12 @@ public class SkillsDTO {
     }
 
     public static SkillsDTO toDto(Skills skills) {
-        return new SkillsDTO(skills.getId(), skills.getSkillName(), skills.getSkillName(),
-                skills.getMasteringLevel(), skills.getLanguageCode()
+        return new SkillsDTO(
+                skills.getId(),
+                skills.getSkillName(),
+                skills.getSkillName(),
+                skills.getMasteringLevel(),
+                skills.getLanguageCode()
         );
     }
 
