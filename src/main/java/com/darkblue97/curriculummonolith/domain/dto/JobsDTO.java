@@ -40,19 +40,28 @@ public class JobsDTO {
     }
 
     public static JobsDTO toDto(Jobs jobs) {
-        return new JobsDTO(jobs.getId(), jobs.getCompanyName(), jobs.getStarted(), jobs.getEnded(),
-                jobs.isActual(), jobs.getDescription(), jobs.getTechnologies(), jobs.getLanguageCode()
+        return new JobsDTO(
+                jobs.getId(),
+                jobs.getCompanyName(),
+                jobs.getStarted(),
+                jobs.getEnded(),
+                jobs.isActual(),
+                jobs.getDescription(),
+                jobs.getTechnologies(),
+                jobs.getLanguageCode()
         );
     }
 
     public static Jobs toModel(JobsDTO jobsDTO) {
-        return new Jobs(jobsDTO.getId(),
+        return new Jobs(
+                jobsDTO.getId(),
                 jobsDTO.getCompanyName(),
                 jobsDTO.getStarted(),
                 jobsDTO.getEnded(),
                 jobsDTO.isActual(),
                 jobsDTO.getDescription(),
                 jobsDTO.getTechnologies(),
-                jobsDTO.getLanguageCode());
+                jobsDTO.getLanguageCode()
+        );
     }
 }

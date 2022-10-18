@@ -24,5 +24,6 @@ public class Skills {
         this.skillName = skillName;
         this.description = description;
         this.masteringLevel = masteringLevel;
+        this.languageCode = languageCode;
     }
 }

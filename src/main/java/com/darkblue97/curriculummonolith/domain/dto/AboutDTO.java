@@ -24,10 +24,22 @@ public class AboutDTO {
     }
 
     public static AboutDTO toDTO(AboutMe aboutMe) {
-        return new AboutDTO(aboutMe.getId(), aboutMe.getTitle(), aboutMe.getText(), aboutMe.getMediaId(), aboutMe.getLanguageCode());
+        return new AboutDTO(
+                aboutMe.getId(),
+                aboutMe.getTitle(),
+                aboutMe.getText(),
+                aboutMe.getMediaId(),
+                aboutMe.getLanguageCode()
+        );
     }
 
     public static AboutMe toModel(AboutDTO aboutDTO) {
-        return new AboutMe(GenerationUUID.generate(), aboutDTO.getTitle(), aboutDTO.getText(), aboutDTO.getMediaId(), aboutDTO.getLanguageCode());
+        return new AboutMe(
+                GenerationUUID.generate(),
+                aboutDTO.getTitle(),
+                aboutDTO.getText(),
+                aboutDTO.getMediaId(),
+                aboutDTO.getLanguageCode()
+        );
     }
 }
