@@ -20,11 +20,12 @@ public class Languages {
     private MasteringLevel listen;
     private LanguageEnum languageCode;
 
-    public Languages(UUID id, String language, MasteringLevel read, MasteringLevel speak, MasteringLevel listen) {
+    public Languages(UUID id, String language, MasteringLevel read, MasteringLevel speak, MasteringLevel listen, LanguageEnum languageCode) {
         this.id = id;
         this.language = language;
         this.read = read;
         this.speak = speak;
         this.listen = listen;
+        this.languageCode = languageCode;
     }
 }

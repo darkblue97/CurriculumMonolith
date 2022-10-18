@@ -19,10 +19,11 @@ public class Skills {
     private MasteringLevel masteringLevel;
     private LanguageEnum languageCode;
 
-    public Skills(UUID id, String skillName, String description, MasteringLevel masteringLevel) {
+    public Skills(UUID id, String skillName, String description, MasteringLevel masteringLevel, LanguageEnum languageCode) {
         this.id = id;
         this.skillName = skillName;
         this.description = description;
         this.masteringLevel = masteringLevel;
+        this.languageCode = languageCode;
     }
 }

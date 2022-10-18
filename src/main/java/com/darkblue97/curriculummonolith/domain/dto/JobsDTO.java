@@ -7,19 +7,29 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class JobsDTO {
 
+    private UUID id;
     private String companyName;
     private LocalDateTime started;
     private LocalDateTime ended;
-    private boolean actual = false;
+    private boolean actual;
     private String description;
     private List<Technologies> technologies;
     private LanguageEnum languageCode;
 
-    public JobsDTO(String companyName, LocalDateTime started, LocalDateTime ended, boolean actual, String description, List<Technologies> technologies, LanguageEnum languageCode) {
+    public JobsDTO(UUID id,
+                   String companyName,
+                   LocalDateTime started,
+                   LocalDateTime ended,
+                   boolean actual,
+                   String description,
+                   List<Technologies> technologies,
+                   LanguageEnum languageCode) {
+        this.id = id;
         this.companyName = companyName;
         this.started = started;
         this.ended = ended;
@@ -30,8 +40,28 @@ public class JobsDTO {
     }
 
     public static JobsDTO toDto(Jobs jobs) {
-        return new JobsDTO(jobs.getCompanyName(), jobs.getStarted(), jobs.getEnded(),
-                jobs.isActual(), jobs.getDescription(), jobs.getTechnologies(), jobs.getLanguageCode()
+        return new JobsDTO(
+                jobs.getId(),
+                jobs.getCompanyName(),
+                jobs.getStarted(),
+                jobs.getEnded(),
+                jobs.isActual(),
+                jobs.getDescription(),
+                jobs.getTechnologies(),
+                jobs.getLanguageCode()
+        );
+    }
+
+    public static Jobs toModel(JobsDTO jobsDTO) {
+        return new Jobs(
+                jobsDTO.getId(),
+                jobsDTO.getCompanyName(),
+                jobsDTO.getStarted(),
+                jobsDTO.getEnded(),
+                jobsDTO.isActual(),
+                jobsDTO.getDescription(),
+                jobsDTO.getTechnologies(),
+                jobsDTO.getLanguageCode()
         );
     }
 }

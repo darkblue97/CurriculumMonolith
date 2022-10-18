@@ -1,4 +1,7 @@
 package com.darkblue97.curriculummonolith.service;
 
-public interface ExperienceService {
+import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
+import com.darkblue97.curriculummonolith.utils.LanguageEnum;
+
+public interface ExperienceService extends CommonMethods<LanguageEnum, JobsDTO> {
 }
