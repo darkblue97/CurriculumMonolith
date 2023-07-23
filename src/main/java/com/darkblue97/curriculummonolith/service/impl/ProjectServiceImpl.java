@@ -28,13 +28,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void putObject(ProjectsDTO projectsDTO) throws DataAlreadySavedException {
-        projectsDAO.save(projectsDTO);
+    public void putObject(ProjectsDTO projectsDTO) throws DataAlreadySavedException, NotFoundException {
+        projectsDAO.update(projectsDTO);
     }
 
     @Override
-    public void postObject(ProjectsDTO projectsDTO) throws NotFoundException {
-        projectsDAO.update(projectsDTO);
+    public void postObject(ProjectsDTO projectsDTO) throws NotFoundException, DataAlreadySavedException {
+        projectsDAO.save(projectsDTO);
     }
 
     @Override

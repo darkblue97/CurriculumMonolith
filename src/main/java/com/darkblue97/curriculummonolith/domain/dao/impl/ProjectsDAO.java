@@ -2,14 +2,13 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 
 import com.darkblue97.curriculummonolith.domain.Projects;
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
-import com.darkblue97.curriculummonolith.domain.dto.AboutDTO;
 import com.darkblue97.curriculummonolith.domain.dto.ProjectsDTO;
+import com.darkblue97.curriculummonolith.domain.mappers.ProjectsMapper;
 import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.repository.ProjectsRepository;
 import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,17 +30,17 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
 
     @Override
     public Optional<ProjectsDTO> get(UUID id) {
-        return projectsRepository.findById(id).map(ProjectsDTO::toDTO);
+        return projectsRepository.findById(id).map(ProjectsMapper.INSTANCE::toDTO);
     }
 
     public Optional<ProjectsDTO> get(LanguageEnum id) {
-        return projectsRepository.findByLanguageCode(id).map(ProjectsDTO::toDTO);
+        return projectsRepository.findByLanguageCode(id).map(ProjectsMapper.INSTANCE::toDTO);
     }
 
     @Override
     public List<ProjectsDTO> getAll(LanguageEnum languageEnum) {
         List<ProjectsDTO> projectsDTOS = new ArrayList<>();
-        projectsRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(k -> projectsDTOS.add(ProjectsDTO.toDTO(k)));
+        projectsRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(k -> projectsDTOS.add(ProjectsMapper.INSTANCE.toDTO(k)));
         return projectsDTOS;
     }
 
@@ -51,9 +50,9 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
         if (!getAllByLanguageCode(projectsDTO.getLanguageCode()).isEmpty()) {
             throw new DataAlreadySavedException("Data already saved with this language code");
         }
-
-        projectsDTO.setId(GenerationUUID.generate());
-        projectsRepository.save(ProjectsDTO.toModel(projectsDTO));
+        Projects projects = ProjectsMapper.INSTANCE.toEntity(projectsDTO);
+        projects.setId(GenerationUUID.generate());
+        projectsRepository.save(projects);
     }
 
     @Override
@@ -68,19 +67,19 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
         projectToUpdate.setLanguageCode(projectsDTO.getLanguageCode());
         projectToUpdate.setUrl(projectsDTO.getUrl());
 
-        projectsRepository.save(ProjectsDTO.toModel(projectToUpdate));
+        projectsRepository.save(ProjectsMapper.INSTANCE.toEntity(projectToUpdate));
     }
 
     @Override
     public void delete(UUID id) throws NotFoundException {
         ProjectsDTO projectsDTO = get(id).orElseThrow(() -> new NotFoundException("Data not found"));
-        Projects projects = ProjectsDTO.toModel(projectsDTO);
+        Projects projects = ProjectsMapper.INSTANCE.toEntity(projectsDTO);
         projectsRepository.delete(projects);
     }
 
     public List<ProjectsDTO> getAllByLanguageCode(LanguageEnum languageEnum) {
         List<ProjectsDTO> projectsDTOS = new ArrayList<>();
-        projectsRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(k -> projectsDTOS.add(ProjectsDTO.toDTO(k)));
+        projectsRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(k -> projectsDTOS.add(ProjectsMapper.INSTANCE.toDTO(k)));
         return projectsDTOS;
     }
 }

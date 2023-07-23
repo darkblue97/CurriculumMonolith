@@ -3,6 +3,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 import com.darkblue97.curriculummonolith.domain.AboutMe;
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.AboutDTO;
+import com.darkblue97.curriculummonolith.domain.mappers.AboutMapper;
 import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.repository.AboutMeRepository;
@@ -28,24 +29,24 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
     }
 
     public Optional<AboutDTO> get(LanguageEnum language) {
-        return aboutMeRepository.findByLanguageCode(language).map(AboutDTO::toDTO);
+        return aboutMeRepository.findByLanguageCode(language).map(AboutMapper.INSTANCE::toDTO);
     }
 
     @Override
     public Optional<AboutDTO> get(UUID id) {
-        return aboutMeRepository.findById(id).map(AboutDTO::toDTO);
+        return aboutMeRepository.findById(id).map(AboutMapper.INSTANCE::toDTO);
     }
 
     @Override
     public List<AboutDTO> getAll(LanguageEnum languageEnum) {
         List<AboutDTO> aboutDTOS = new ArrayList<>();
-        aboutMeRepository.findAll().iterator().forEachRemaining(k -> aboutDTOS.add(AboutDTO.toDTO(k)));
+        aboutMeRepository.findAll().iterator().forEachRemaining(k -> aboutDTOS.add(AboutMapper.INSTANCE.toDTO(k)));
         return aboutDTOS;
     }
 
     public List<AboutDTO> getAllByLanguageCode(LanguageEnum languageEnum) {
         List<AboutDTO> aboutDTOS = new ArrayList<>();
-        aboutMeRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(k -> aboutDTOS.add(AboutDTO.toDTO(k)));
+        aboutMeRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(k -> aboutDTOS.add(AboutMapper.INSTANCE.toDTO(k)));
         return aboutDTOS;
     }
 
@@ -57,8 +58,9 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
             throw new DataAlreadySavedException("Data already saved with this language code");
         }
 
-        aboutDTO.setId(GenerationUUID.generate());
-        aboutMeRepository.save(AboutDTO.toModel(aboutDTO));
+        AboutMe aboutMe = AboutMapper.INSTANCE.toEntity(aboutDTO);
+        aboutMe.setId(GenerationUUID.generate());
+        aboutMeRepository.save(aboutMe);
     }
 
     @Override
@@ -69,14 +71,14 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
         aboutMeToUpdate.setText(aboutDTO.getText());
         aboutMeToUpdate.setMediaId(aboutDTO.getMediaId());
         aboutMeToUpdate.setLanguageCode(aboutDTO.getLanguageCode());
-        AboutMe aboutMe = AboutDTO.toModel(aboutMeToUpdate);
+        AboutMe aboutMe = AboutMapper.INSTANCE.toEntity(aboutMeToUpdate);
         aboutMeRepository.save(aboutMe);
     }
 
     @Override
     public void delete(UUID id) throws NotFoundException {
         AboutDTO aboutMeToDelete = get(id).orElseThrow(() -> new NotFoundException("Data not found"));
-        AboutMe aboutMe = AboutDTO.toModel(aboutMeToDelete);
+        AboutMe aboutMe = AboutMapper.INSTANCE.toEntity(aboutMeToDelete);
         aboutMeRepository.delete(aboutMe);
     }
 }

@@ -3,6 +3,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 import com.darkblue97.curriculummonolith.domain.Skills;
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.SkillsDTO;
+import com.darkblue97.curriculummonolith.domain.mappers.SkillsMapper;
 import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.repository.SkillsRepository;
@@ -29,18 +30,18 @@ public class SkillsDAO implements DAOInterface<SkillsDTO> {
 
     @Override
     public Optional<SkillsDTO> get(UUID id) {
-        return skillsRepository.findById(id).map(SkillsDTO::toDto);
+        return skillsRepository.findById(id).map(SkillsMapper.INSTANCE::toDTO);
     }
 
     public Optional<SkillsDTO> get(LanguageEnum languageEnum) {
-        return skillsRepository.findByLanguageCode(languageEnum).map(SkillsDTO::toDto);
+        return skillsRepository.findByLanguageCode(languageEnum).map(SkillsMapper.INSTANCE::toDTO);
     }
 
     @Override
     public List<SkillsDTO> getAll(LanguageEnum languageEnum) {
         List<SkillsDTO> skillsDTOS = new ArrayList<>();
         skillsRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(
-                k -> skillsDTOS.add(SkillsDTO.toDto(k))
+                k -> skillsDTOS.add(SkillsMapper.INSTANCE.toDTO(k))
         );
 
         return skillsDTOS;
@@ -53,8 +54,9 @@ public class SkillsDAO implements DAOInterface<SkillsDTO> {
             throw new DataAlreadySavedException("Data already saved with this language code");
         }
 
-        skillsDTO.setId(GenerationUUID.generate());
-        skillsRepository.save(SkillsDTO.toModel(skillsDTO));
+        Skills skills = SkillsMapper.INSTANCE.toEntity(skillsDTO);
+        skills.setId(GenerationUUID.generate());
+        skillsRepository.save(skills);
     }
 
     @Override
@@ -66,20 +68,20 @@ public class SkillsDAO implements DAOInterface<SkillsDTO> {
         skillsToUpdate.setMasteringLevel(skillsDTO.getMasteringLevel());
         skillsToUpdate.setLanguageCode(skillsDTO.getLanguageCode());
 
-        skillsRepository.save(SkillsDTO.toModel(skillsToUpdate));
+        skillsRepository.save(SkillsMapper.INSTANCE.toEntity(skillsToUpdate));
     }
 
     @Override
     @Transactional
     public void delete(UUID id) throws NotFoundException {
         SkillsDTO skillsDTO = get(id).orElseThrow(() -> new NotFoundException("Data not found"));
-        Skills skills = SkillsDTO.toModel(skillsDTO);
+        Skills skills = SkillsMapper.INSTANCE.toEntity(skillsDTO);
         skillsRepository.delete(skills);
     }
 
     public List<SkillsDTO> getAllByLanguageCode(LanguageEnum languageEnum) {
         List<SkillsDTO> skillsDTOS = new ArrayList<>();
-        skillsRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(skills -> skillsDTOS.add(SkillsDTO.toDto(skills)));
+        skillsRepository.findAllByLanguageCode(languageEnum).iterator().forEachRemaining(skills -> skillsDTOS.add(SkillsMapper.INSTANCE.toDTO(skills)));
         return skillsDTOS;
     }
 }

@@ -29,12 +29,12 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public void putObject(LanguagesDTO languagesDTO) throws DataAlreadySavedException {
-        languageDAO.save(languagesDTO);
+        languageDAO.update(languagesDTO);
     }
 
     @Override
-    public void postObject(LanguagesDTO languagesDTO) throws NotFoundException {
-        languageDAO.update(languagesDTO);
+    public void postObject(LanguagesDTO languagesDTO) throws NotFoundException, DataAlreadySavedException {
+        languageDAO.save(languagesDTO);
     }
 
     @Override
