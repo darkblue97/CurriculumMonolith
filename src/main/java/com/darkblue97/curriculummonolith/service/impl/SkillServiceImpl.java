@@ -33,13 +33,13 @@ public class SkillServiceImpl implements SkillsService {
     }
 
     @Override
-    public void putObject(SkillsDTO skillsDTO) throws DataAlreadySavedException {
-        skillsDAO.save(skillsDTO);
+    public void putObject(SkillsDTO skillsDTO) throws NotFoundException {
+        skillsDAO.update(skillsDTO);
     }
 
     @Override
     public void postObject(SkillsDTO skillsDTO) throws NotFoundException, DataAlreadySavedException {
-        skillsDAO.update(skillsDTO);
+        skillsDAO.save(skillsDTO);
     }
 
     @Override

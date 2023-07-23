@@ -21,30 +21,4 @@ public class ProjectsDTO {
     private LocalDateTime ended;
     private boolean currentlyWorking;
     private LanguageEnum languageCode;
-
-    public static ProjectsDTO toDTO(Projects projects) {
-        return new ProjectsDTO(
-                projects.getId(),
-                projects.getProjectName(),
-                projects.getDescription(),
-                projects.getUrl(),
-                projects.getStarted(),
-                projects.getEnded(),
-                projects.isCurrentlyWorking(),
-                projects.getLanguageCode()
-        );
-    }
-
-    public static Projects toModel(ProjectsDTO projectsDTO) {
-        return new Projects(
-                GenerationUUID.generate(),
-                projectsDTO.getProjectName(),
-                projectsDTO.getDescription(),
-                projectsDTO.getUrl(),
-                projectsDTO.getStarted(),
-                projectsDTO.getEnded(),
-                projectsDTO.isCurrentlyWorking(),
-                projectsDTO.getLanguageCode()
-        );
-    }
 }

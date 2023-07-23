@@ -2,6 +2,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
+import com.darkblue97.curriculummonolith.domain.mappers.JobsMapper;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.repository.ExperienceRepository;
 import com.darkblue97.curriculummonolith.utils.GenerationUUID;
@@ -26,15 +27,15 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
 
     @Override
     public Optional<JobsDTO> get(UUID id) {
-        return experienceRepository.findById(id).map(JobsDTO::toDto);
+        return experienceRepository.findById(id).map(JobsMapper.INSTANCE::toDTO);
     }
 
     @Override
     public List<JobsDTO> getAll(LanguageEnum languageEnum) throws NotFoundException {
         List<JobsDTO> jobsDTOS = new ArrayList<>();
-        experienceRepository.findAllByLanguageCode(languageEnum).forEach(k -> jobsDTOS.add(JobsDTO.toDto(k)));
+        experienceRepository.findAllByLanguageCode(languageEnum).forEach(k -> jobsDTOS.add(JobsMapper.INSTANCE.toDTO(k)));
 
-        if(jobsDTOS.isEmpty()){
+        if (jobsDTOS.isEmpty()) {
             throw new NotFoundException("Jobs not found");
         }
 
@@ -44,7 +45,7 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
     @Override
     public void save(JobsDTO jobsDTO) {
         jobsDTO.setId(GenerationUUID.generate());
-        experienceRepository.save(JobsDTO.toModel(jobsDTO));
+        experienceRepository.save(JobsMapper.INSTANCE.toEntity(jobsDTO));
     }
 
     @Override
@@ -61,7 +62,7 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
         toUpdate.setActual(jobsDTO.isActual());
         toUpdate.setLanguageCode(jobsDTO.getLanguageCode());
 
-        experienceRepository.save(JobsDTO.toModel(toUpdate));
+        experienceRepository.save(JobsMapper.INSTANCE.toEntity(toUpdate));
     }
 
     @Override
@@ -70,6 +71,6 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
                 () -> new NotFoundException("Job experience with that UUID is not found database")
         );
 
-        experienceRepository.delete(JobsDTO.toModel(toDelete));
+        experienceRepository.delete(JobsMapper.INSTANCE.toEntity(toDelete));
     }
 }

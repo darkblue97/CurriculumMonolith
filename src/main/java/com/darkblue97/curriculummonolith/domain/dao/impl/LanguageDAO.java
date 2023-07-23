@@ -3,6 +3,7 @@ package com.darkblue97.curriculummonolith.domain.dao.impl;
 import com.darkblue97.curriculummonolith.domain.Languages;
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.LanguagesDTO;
+import com.darkblue97.curriculummonolith.domain.mappers.LanguageMapper;
 import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.repository.LanguagesRepository;
@@ -29,13 +30,13 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
 
     @Override
     public Optional<LanguagesDTO> get(UUID id) {
-        return languagesRepository.findById(id).map(LanguagesDTO::toDto);
+        return languagesRepository.findById(id).map(LanguageMapper.INSTANCE::toDTO);
     }
 
     @Override
     public List<LanguagesDTO> getAll(LanguageEnum languageEnum) {
         List<LanguagesDTO> languagesDTOS = new ArrayList<>();
-        languagesRepository.findAll().iterator().forEachRemaining(k -> languagesDTOS.add(LanguagesDTO.toDto(k)));
+        languagesRepository.findAll().iterator().forEachRemaining(k -> languagesDTOS.add(LanguageMapper.INSTANCE.toDTO(k)));
         return languagesDTOS;
     }
 
@@ -49,7 +50,7 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
         }
 
         languagesDTO.setId(GenerationUUID.generate());
-        languagesRepository.save(LanguagesDTO.toModel(languagesDTO));
+        languagesRepository.save(LanguageMapper.INSTANCE.toEntity(languagesDTO));
     }
 
     @Override
@@ -70,7 +71,7 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
     @Override
     public void delete(UUID id) throws NotFoundException {
         LanguagesDTO toDelete = get(id).orElseThrow(() -> new NotFoundException("Data not found"));
-        Languages languages = LanguagesDTO.toModel(toDelete);
+        Languages languages = LanguageMapper.INSTANCE.toEntity(toDelete);
         languagesRepository.delete(languages);
     }
 

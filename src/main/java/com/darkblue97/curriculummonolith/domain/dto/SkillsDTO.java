@@ -1,7 +1,5 @@
 package com.darkblue97.curriculummonolith.domain.dto;
 
-import com.darkblue97.curriculummonolith.domain.Skills;
-import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.MasteringLevel;
 import lombok.AllArgsConstructor;
@@ -18,20 +16,4 @@ public class SkillsDTO {
     private String description;
     private MasteringLevel masteringLevel;
     private LanguageEnum languageCode;
-
-    public static SkillsDTO toDto(Skills skills) {
-        return new SkillsDTO(skills.getId(), skills.getSkillName(), skills.getSkillName(),
-                skills.getMasteringLevel(), skills.getLanguageCode()
-        );
-    }
-
-    public static Skills toModel(SkillsDTO skillsDTO) {
-        return new Skills(
-                GenerationUUID.generate(),
-                skillsDTO.getSkillName(),
-                skillsDTO.getDescription(),
-                skillsDTO.getMasteringLevel(),
-                skillsDTO.getLanguageCode()
-        );
-    }
 }

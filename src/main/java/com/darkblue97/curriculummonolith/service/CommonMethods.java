@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface CommonMethods<T, V> {
     List<V> getAll(T t) throws NotFoundException;
 
-    void putObject(V v) throws DataAlreadySavedException;
+    void putObject(V v) throws DataAlreadySavedException, NotFoundException;
 
     void postObject(V v) throws NotFoundException, DataAlreadySavedException;
 

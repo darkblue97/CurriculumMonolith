@@ -33,13 +33,13 @@ public class AboutMeServiceImpl implements AboutMeService {
     }
 
     @Override
-    public void postObject(AboutDTO aboutDTO) throws NotFoundException {
-        aboutMeDAO.update(aboutDTO);
+    public void postObject(AboutDTO aboutDTO) throws NotFoundException, DataAlreadySavedException {
+        aboutMeDAO.save(aboutDTO);
     }
 
     @Override
-    public void putObject(AboutDTO aboutDTO) throws DataAlreadySavedException {
-        aboutMeDAO.save(aboutDTO);
+    public void putObject(AboutDTO aboutDTO) throws DataAlreadySavedException, NotFoundException {
+        aboutMeDAO.update(aboutDTO);
     }
 
     @Override

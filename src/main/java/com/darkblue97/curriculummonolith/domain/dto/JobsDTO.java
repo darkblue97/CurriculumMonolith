@@ -1,6 +1,5 @@
 package com.darkblue97.curriculummonolith.domain.dto;
 
-import com.darkblue97.curriculummonolith.domain.Jobs;
 import com.darkblue97.curriculummonolith.domain.Technologies;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import lombok.AllArgsConstructor;
@@ -22,21 +21,4 @@ public class JobsDTO {
     private String description;
     private List<Technologies> technologies;
     private LanguageEnum languageCode;
-
-    public static JobsDTO toDto(Jobs jobs) {
-        return new JobsDTO(jobs.getId(), jobs.getCompanyName(), jobs.getStarted(), jobs.getEnded(),
-                jobs.isActual(), jobs.getDescription(), jobs.getTechnologies(), jobs.getLanguageCode()
-        );
-    }
-
-    public static Jobs toModel(JobsDTO jobsDTO) {
-        return new Jobs(jobsDTO.getId(),
-                jobsDTO.getCompanyName(),
-                jobsDTO.getStarted(),
-                jobsDTO.getEnded(),
-                jobsDTO.isActual(),
-                jobsDTO.getDescription(),
-                jobsDTO.getTechnologies(),
-                jobsDTO.getLanguageCode());
-    }
 }

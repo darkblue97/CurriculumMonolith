@@ -27,13 +27,13 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
-    public void putObject(JobsDTO jobsDTO) {
-        jobsDAO.save(jobsDTO);
+    public void putObject(JobsDTO jobsDTO) throws NotFoundException {
+        jobsDAO.update(jobsDTO);
     }
 
     @Override
     public void postObject(JobsDTO jobsDTO) throws NotFoundException {
-        jobsDAO.update(jobsDTO);
+        jobsDAO.save(jobsDTO);
     }
 
     @Override

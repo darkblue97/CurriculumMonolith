@@ -1,11 +1,13 @@
 package com.darkblue97.curriculummonolith.utils.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
 public class ResponseObject {
 
     private LocalDateTime timestamp;
@@ -14,11 +16,4 @@ public class ResponseObject {
     private String message;
     private String error;
 
-    public ResponseObject(LocalDateTime timestamp, Object objectResponse, HttpStatus status, String message, String error) {
-        this.timestamp = timestamp;
-        this.objectResponse = objectResponse;
-        this.status = status;
-        this.message = message;
-        this.error = error;
-    }
 }
