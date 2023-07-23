@@ -3,6 +3,7 @@ package com.darkblue97.curriculummonolith.domain.dto;
 import com.darkblue97.curriculummonolith.domain.Jobs;
 import com.darkblue97.curriculummonolith.domain.Technologies;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
 public class JobsDTO {
 
     private UUID id;
@@ -21,47 +23,20 @@ public class JobsDTO {
     private List<Technologies> technologies;
     private LanguageEnum languageCode;
 
-    public JobsDTO(UUID id,
-                   String companyName,
-                   LocalDateTime started,
-                   LocalDateTime ended,
-                   boolean actual,
-                   String description,
-                   List<Technologies> technologies,
-                   LanguageEnum languageCode) {
-        this.id = id;
-        this.companyName = companyName;
-        this.started = started;
-        this.ended = ended;
-        this.actual = actual;
-        this.description = description;
-        this.technologies = technologies;
-        this.languageCode = languageCode;
-    }
-
     public static JobsDTO toDto(Jobs jobs) {
-        return new JobsDTO(
-                jobs.getId(),
-                jobs.getCompanyName(),
-                jobs.getStarted(),
-                jobs.getEnded(),
-                jobs.isActual(),
-                jobs.getDescription(),
-                jobs.getTechnologies(),
-                jobs.getLanguageCode()
+        return new JobsDTO(jobs.getId(), jobs.getCompanyName(), jobs.getStarted(), jobs.getEnded(),
+                jobs.isActual(), jobs.getDescription(), jobs.getTechnologies(), jobs.getLanguageCode()
         );
     }
 
     public static Jobs toModel(JobsDTO jobsDTO) {
-        return new Jobs(
-                jobsDTO.getId(),
+        return new Jobs(jobsDTO.getId(),
                 jobsDTO.getCompanyName(),
                 jobsDTO.getStarted(),
                 jobsDTO.getEnded(),
                 jobsDTO.isActual(),
                 jobsDTO.getDescription(),
                 jobsDTO.getTechnologies(),
-                jobsDTO.getLanguageCode()
-        );
+                jobsDTO.getLanguageCode());
     }
 }

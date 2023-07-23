@@ -4,11 +4,13 @@ import com.darkblue97.curriculummonolith.domain.Skills;
 import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.MasteringLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
 public class SkillsDTO {
 
     private UUID id;
@@ -17,21 +19,9 @@ public class SkillsDTO {
     private MasteringLevel masteringLevel;
     private LanguageEnum languageCode;
 
-    public SkillsDTO(UUID id, String skillName, String description, MasteringLevel masteringLevel, LanguageEnum languageCode) {
-        this.id = id;
-        this.skillName = skillName;
-        this.description = description;
-        this.masteringLevel = masteringLevel;
-        this.languageCode = languageCode;
-    }
-
     public static SkillsDTO toDto(Skills skills) {
-        return new SkillsDTO(
-                skills.getId(),
-                skills.getSkillName(),
-                skills.getSkillName(),
-                skills.getMasteringLevel(),
-                skills.getLanguageCode()
+        return new SkillsDTO(skills.getId(), skills.getSkillName(), skills.getSkillName(),
+                skills.getMasteringLevel(), skills.getLanguageCode()
         );
     }
 
