@@ -2,6 +2,7 @@ package com.darkblue97.curriculummonolith.domain;
 
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.MasteringLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Data
 @Document(value = "Languages")
+@AllArgsConstructor
 public class Languages {
 
     @Id
@@ -20,12 +22,4 @@ public class Languages {
     private MasteringLevel listen;
     private LanguageEnum languageCode;
 
-    public Languages(UUID id, String language, MasteringLevel read, MasteringLevel speak, MasteringLevel listen, LanguageEnum languageCode) {
-        this.id = id;
-        this.language = language;
-        this.read = read;
-        this.speak = speak;
-        this.listen = listen;
-        this.languageCode = languageCode;
-    }
 }
