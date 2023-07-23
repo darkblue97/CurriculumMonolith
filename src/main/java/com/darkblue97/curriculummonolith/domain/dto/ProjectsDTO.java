@@ -1,7 +1,5 @@
 package com.darkblue97.curriculummonolith.domain.dto;
 
-import com.darkblue97.curriculummonolith.domain.Projects;
-import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
