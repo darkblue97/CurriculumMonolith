@@ -50,9 +50,9 @@ public class ProjectsDAO implements DAOInterface<ProjectsDTO> {
         if (!getAllByLanguageCode(projectsDTO.getLanguageCode()).isEmpty()) {
             throw new DataAlreadySavedException("Data already saved with this language code");
         }
-
-        projectsDTO.setId(GenerationUUID.generate());
-        projectsRepository.save(ProjectsMapper.INSTANCE.toEntity(projectsDTO));
+        Projects projects = ProjectsMapper.INSTANCE.toEntity(projectsDTO);
+        projects.setId(GenerationUUID.generate());
+        projectsRepository.save(projects);
     }
 
     @Override

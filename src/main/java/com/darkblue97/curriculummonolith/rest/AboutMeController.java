@@ -52,9 +52,9 @@ public class AboutMeController {
                     .setMessage("Information successfully saved")
                     .setStatus(HttpStatus.OK)
                     .build();
-        } catch (DataAlreadySavedException e) {
+        } catch (NotFoundException e) {
             return new ResponseEntityBuilderResponse<>()
-                    .setError("Exception saving the about me")
+                    .setError("Exception updating the about me")
                     .setObjectResponse(e.getLocalizedMessage())
                     .setStatus(HttpStatus.NOT_ACCEPTABLE)
                     .build();
@@ -77,6 +77,12 @@ public class AboutMeController {
         } catch (NotFoundException e) {
             return new ResponseEntityBuilderResponse<>()
                     .setError("Exception updating the about me")
+                    .setObjectResponse(e.getLocalizedMessage())
+                    .setStatus(HttpStatus.NOT_ACCEPTABLE)
+                    .build();
+        } catch (DataAlreadySavedException e) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("Exception saving the about me")
                     .setObjectResponse(e.getLocalizedMessage())
                     .setStatus(HttpStatus.NOT_ACCEPTABLE)
                     .build();

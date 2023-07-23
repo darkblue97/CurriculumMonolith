@@ -58,8 +58,9 @@ public class AboutMeDAO implements DAOInterface<AboutDTO> {
             throw new DataAlreadySavedException("Data already saved with this language code");
         }
 
-        aboutDTO.setId(GenerationUUID.generate());
-        aboutMeRepository.save(AboutMapper.INSTANCE.toEntity(aboutDTO));
+        AboutMe aboutMe = AboutMapper.INSTANCE.toEntity(aboutDTO);
+        aboutMe.setId(GenerationUUID.generate());
+        aboutMeRepository.save(aboutMe);
     }
 
     @Override

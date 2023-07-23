@@ -54,8 +54,9 @@ public class SkillsDAO implements DAOInterface<SkillsDTO> {
             throw new DataAlreadySavedException("Data already saved with this language code");
         }
 
-        skillsDTO.setId(GenerationUUID.generate());
-        skillsRepository.save(SkillsMapper.INSTANCE.toEntity(skillsDTO));
+        Skills skills = SkillsMapper.INSTANCE.toEntity(skillsDTO);
+        skills.setId(GenerationUUID.generate());
+        skillsRepository.save(skills);
     }
 
     @Override

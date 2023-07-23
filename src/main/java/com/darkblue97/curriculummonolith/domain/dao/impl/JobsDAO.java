@@ -1,5 +1,6 @@
 package com.darkblue97.curriculummonolith.domain.dao.impl;
 
+import com.darkblue97.curriculummonolith.domain.Jobs;
 import com.darkblue97.curriculummonolith.domain.dao.DAOInterface;
 import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
 import com.darkblue97.curriculummonolith.domain.mappers.JobsMapper;
@@ -44,8 +45,9 @@ public class JobsDAO implements DAOInterface<JobsDTO> {
 
     @Override
     public void save(JobsDTO jobsDTO) {
-        jobsDTO.setId(GenerationUUID.generate());
-        experienceRepository.save(JobsMapper.INSTANCE.toEntity(jobsDTO));
+        Jobs jobs = JobsMapper.INSTANCE.toEntity(jobsDTO);
+        jobs.setId(GenerationUUID.generate());
+        experienceRepository.save(jobs);
     }
 
     @Override

@@ -49,8 +49,9 @@ public class LanguageDAO implements DAOInterface<LanguagesDTO> {
             throw new DataAlreadySavedException("Data already saved with this language code");
         }
 
-        languagesDTO.setId(GenerationUUID.generate());
-        languagesRepository.save(LanguageMapper.INSTANCE.toEntity(languagesDTO));
+        Languages languages = LanguageMapper.INSTANCE.toEntity(languagesDTO);
+        languages.setId(GenerationUUID.generate());
+        languagesRepository.save(languages);
     }
 
     @Override
