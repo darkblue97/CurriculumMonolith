@@ -1,11 +1,9 @@
 package com.darkblue97.curriculummonolith.rest;
 
-import com.darkblue97.curriculummonolith.domain.UuidDTO;
 import com.darkblue97.curriculummonolith.domain.dto.AboutDTO;
 import com.darkblue97.curriculummonolith.exceptions.DataAlreadySavedException;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.service.AboutMeService;
-import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.response.ResponseEntityBuilderResponse;
 import org.springframework.http.HttpStatus;
@@ -95,18 +93,9 @@ public class AboutMeController {
     }
 
     @DeleteMapping(value = "/about")
-    public ResponseEntity<Object> deleteAboutMe(@RequestBody String uid) {
+    public ResponseEntity<Object> deleteAboutMe(@RequestBody AboutDTO uid) {
         try {
-            UuidDTO uuidDTO = new UuidDTO(uid);
-            if (GenerationUUID.isUUIDValid(uuidDTO.getId())) {
-                aboutMeService.deleteObject(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
-            } else {
-                return new ResponseEntityBuilderResponse<>()
-                        .setStatus(HttpStatus.OK)
-                        .setMessage("UUID provided does not exist")
-                        .build();
-            }
-
+            aboutMeService.deleteObject(uid.getId());
             return new ResponseEntityBuilderResponse<>()
                     .setMessage("Information successfully deleted")
                     .setStatus(HttpStatus.OK)
@@ -114,6 +103,12 @@ public class AboutMeController {
         } catch (NotFoundException e) {
             return new ResponseEntityBuilderResponse<>()
                     .setError("Exception deleting the about me")
+                    .setObjectResponse(e.getLocalizedMessage())
+                    .setStatus(HttpStatus.NOT_ACCEPTABLE)
+                    .build();
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("The string provided is nota an UUID")
                     .setObjectResponse(e.getLocalizedMessage())
                     .setStatus(HttpStatus.NOT_ACCEPTABLE)
                     .build();

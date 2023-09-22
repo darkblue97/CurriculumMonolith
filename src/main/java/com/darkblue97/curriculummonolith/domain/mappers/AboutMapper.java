@@ -12,7 +12,7 @@ public interface AboutMapper {
     AboutMapper INSTANCE = Mappers.getMapper(AboutMapper.class);
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id"),
             @Mapping(target = "title"),
             @Mapping(target = "text"),
             @Mapping(target = "mediaId"),
@@ -22,7 +22,7 @@ public interface AboutMapper {
 
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id"),
             @Mapping(target = "title"),
             @Mapping(target = "text"),
             @Mapping(target = "mediaId"),

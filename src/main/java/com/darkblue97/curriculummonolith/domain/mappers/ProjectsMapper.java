@@ -13,7 +13,7 @@ public interface ProjectsMapper {
     ProjectsMapper INSTANCE = Mappers.getMapper(ProjectsMapper.class);
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id"),
             @Mapping(target = "projectName"),
             @Mapping(target = "description"),
             @Mapping(target = "url"),
@@ -26,7 +26,7 @@ public interface ProjectsMapper {
 
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id"),
             @Mapping(target = "projectName"),
             @Mapping(target = "description"),
             @Mapping(target = "url"),

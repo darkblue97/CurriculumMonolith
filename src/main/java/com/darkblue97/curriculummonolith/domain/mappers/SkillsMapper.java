@@ -13,7 +13,7 @@ public interface SkillsMapper {
     SkillsMapper INSTANCE = Mappers.getMapper(SkillsMapper.class);
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id"),
             @Mapping(target = "skillName"),
             @Mapping(target = "description"),
             @Mapping(target = "masteringLevel"),
@@ -23,7 +23,7 @@ public interface SkillsMapper {
 
 
     @Mappings({
-            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "id"),
             @Mapping(target = "skillName"),
             @Mapping(target = "description"),
             @Mapping(target = "masteringLevel"),
