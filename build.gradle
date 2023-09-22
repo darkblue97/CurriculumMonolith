@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '3.1.2'
+    id 'org.springframework.boot' version '3.1.4'
     id "io.spring.dependency-management" version "1.1.2"
     id 'java'
     id "org.sonarqube" version "3.3"
@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.darkblue97'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_21
 
 configurations {
     compileOnly {

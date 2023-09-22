@@ -1,10 +1,8 @@
 package com.darkblue97.curriculummonolith.rest;
 
-import com.darkblue97.curriculummonolith.domain.UuidDTO;
 import com.darkblue97.curriculummonolith.domain.dto.JobsDTO;
 import com.darkblue97.curriculummonolith.exceptions.NotFoundException;
 import com.darkblue97.curriculummonolith.service.ExperienceService;
-import com.darkblue97.curriculummonolith.utils.GenerationUUID;
 import com.darkblue97.curriculummonolith.utils.LanguageEnum;
 import com.darkblue97.curriculummonolith.utils.response.ResponseEntityBuilderResponse;
 import org.springframework.http.HttpStatus;
@@ -84,30 +82,28 @@ public class ExperienceController {
     }
 
     @DeleteMapping(value = "/experience")
-    public ResponseEntity<Object> deleteExperience(@RequestBody String uid) {
+    public ResponseEntity<Object> deleteExperience(@RequestBody JobsDTO uid) {
         try {
-            UuidDTO uuidDTO = new UuidDTO(uid);
-            if (GenerationUUID.isUUIDValid(uuidDTO.getId())) {
-                experienceService.deleteObject(GenerationUUID.returnUUIDFrmString(uuidDTO.getId()));
-            } else {
-                return new ResponseEntityBuilderResponse<>()
-                        .setStatus(HttpStatus.OK)
-                        .setMessage("UUID provided does not exist")
-                        .build();
-            }
+            experienceService.deleteObject(uid.getId());
             return new ResponseEntityBuilderResponse<>()
                     .setStatus(HttpStatus.OK)
                     .setMessage("Information successfully deleted")
                     .build();
-        } catch (NotFoundException nte) {
+        } catch (NotFoundException e) {
             return new ResponseEntityBuilderResponse<>()
-                    .setError(nte.toString())
-                    .setStatus(HttpStatus.NOT_FOUND)
-                    .setObjectResponse(nte.getLocalizedMessage())
+                    .setError("Exception deleting the about me")
+                    .setObjectResponse(e.getLocalizedMessage())
+                    .setStatus(HttpStatus.NOT_ACCEPTABLE)
                     .build();
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntityBuilderResponse<>()
-                    .setError("Internal server error")
+                    .setError("The string provided is nota an UUID")
+                    .setObjectResponse(e.getLocalizedMessage())
+                    .setStatus(HttpStatus.NOT_ACCEPTABLE)
+                    .build();
+        } catch (Exception e) {
+            return new ResponseEntityBuilderResponse<>()
+                    .setError("Internal server error while saving")
                     .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                     .build();
         }
